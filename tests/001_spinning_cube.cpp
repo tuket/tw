@@ -3,6 +3,7 @@
 #include <glad/glad.h>
 #include <tgl/context.hpp>
 #include <tgl/render_target.hpp>
+#include <tgl/blending.hpp>
 #include <glm/vec3.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtx/euler_angles.hpp>
@@ -100,6 +101,9 @@ void launch_test_1()
     SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_CORE);
     SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 3);
     SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 3);
+    SDL_GL_SetAttribute(SDL_GL_MULTISAMPLEBUFFERS, 1);
+    SDL_GL_SetAttribute(SDL_GL_MULTISAMPLESAMPLES, 4);
+
     window = SDL_CreateWindow("title",
         SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED,
         INIT_WINDOW_WIDTH, INIT_WINDOW_HEIGHT,
@@ -109,10 +113,13 @@ void launch_test_1()
     SDL_GL_MakeCurrent(window, glContext);
     SDL_GL_SetSwapInterval(1); // Enable vsync
 
+
     if(gladLoadGL() == 0) {
         fprintf(stderr, "Failed to initialize OpenGL loader!\n");
     }
     tgl::enableDepthTest(true);
+    tgl::blending::enable();
+    tgl::enableMultisampling();
     tgl::viewport(INIT_WINDOW_WIDTH, INIT_WINDOW_HEIGHT);
     tgl::scissor(INIT_WINDOW_WIDTH, INIT_WINDOW_HEIGHT);
 
