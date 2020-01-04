@@ -14,11 +14,15 @@ static bool gameLoopRunning = true;
 static const char vertShaderSrc[] = R"GLSL(
 #version 330
 
-layout(location = 0) in vec3 u_pos;
+layout(location = 0) in vec3 a_pos;
+layout(location = 1) in vec3 a_color;
+
+out vec3 color;
 
 void main()
 {
-    gl_Position = vec4(u_pos, 1.0);
+    color = a_color;
+    gl_Position = vec4(a_pos, 1.0);
 }
 )GLSL";
 
@@ -27,24 +31,29 @@ static const char fragShaderSrc[] = R"GLSL(
 
 layout(location = 0) out vec4 o_color;
 
+in vec3 color;
+
 void main()
 {
-    o_color = vec4(1.0, 0.0, 0.0, 1.0);
+    o_color = vec4(color, 1.0);
 }
 )GLSL";
 
 static const glm::vec3 trianglePositions[3] = {
     {-0.5f, -0.5f, 0}, {+0.5f, -0.5f, 0}, {0, +0.5f, 0}
 };
+static const glm::vec3 triangleColors[3] = {
+    {1, 0, 0}, {0, 1, 0}, {0, 0, 1}
+};
 
 constexpr int INIT_WINDOW_WIDTH = 800;
 constexpr int INIT_WINDOW_HEIGHT = 600;
 
-int main(int argc, char* argv[])
+void launch_test_0()
 {
     if(SDL_Init(SDL_INIT_EVERYTHING) != 0) {
         fprintf(stderr, "Error: %s\n", SDL_GetError());
-        return -1;
+        return;
     }
     SDL_GL_SetAttribute(SDL_GL_CONTEXT_FLAGS, 0);
     SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_CORE);
@@ -61,15 +70,17 @@ int main(int argc, char* argv[])
 
     if(gladLoadGL() == 0) {
         fprintf(stderr, "Failed to initialize OpenGL loader!\n");
-        return -1;
     }
     tgl::viewport(INIT_WINDOW_WIDTH, INIT_WINDOW_HEIGHT);
     tgl::scissor(INIT_WINDOW_WIDTH, INIT_WINDOW_HEIGHT);
 
-    auto vbo = tgl::VboT<glm::vec3>::create();
+    auto vboPos = tgl::VboT<glm::vec3>::create();
+    auto vboColor = tgl::VboT<glm::vec3>::create();
     auto vao = tgl::Vao::create();
-    vbo.upload(trianglePositions);
-    vao.link(0, vbo.attribRef<0>());
+    vboPos.upload(trianglePositions);
+    vboColor.upload(triangleColors);
+    vao.link(0, vboPos.attribRef<0>());
+    vao.link(1, vboColor.attribRef<0>());
 
     auto shader = tgl::ShaderProgram::create(vertShaderSrc, fragShaderSrc);
 
@@ -93,8 +104,11 @@ int main(int argc, char* argv[])
         SDL_GL_SwapWindow(window);
     }
 
+    shader.free();
+    vboPos.free();
+    vboColor.free();
+    vao.free();
     SDL_GL_DeleteContext(glContext);
     SDL_DestroyWindow(window);
     SDL_Quit();
-    return 0;
 }

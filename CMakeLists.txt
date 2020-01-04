@@ -34,6 +34,8 @@ set(SOURCES
 )
 PREPEND(SOURCES "src/" ${SOURCES})
 
+add_subdirectory(tests)
+
 add_executable(tw
     ${SOURCES}
 )
