@@ -28,6 +28,7 @@ add_subdirectory(libs/imgui)
 add_subdirectory(libs/stb)
 add_subdirectory(libs/tl)
 add_subdirectory(libs/tgl)
+add_subdirectory(libs/cgltf)
 
 set(SOURCES
     main.cpp
@@ -48,4 +49,5 @@ target_link_libraries(tw
     stb
     tl
     tgl
+    cgltf
 )

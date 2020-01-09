@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE QtCreatorProject>
-<!-- Written by QtCreator 4.11.0, 2020-01-04T23:31:54. -->
+<!-- Written by QtCreator 4.11.0, 2020-01-07T23:29:04. -->
 <qtcreator>
  <data>
   <variable>EnvironmentId</variable>
@@ -548,7 +548,7 @@
     <value type="QString" key="ProjectExplorer.ProjectConfiguration.DisplayName">run_test</value>
     <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">CMakeProjectManager.CMakeRunConfiguration.run_test</value>
     <value type="QString" key="ProjectExplorer.RunConfiguration.BuildKey">run_test</value>
-    <value type="QString" key="RunConfiguration.Arguments">1</value>
+    <value type="QString" key="RunConfiguration.Arguments">2</value>
     <value type="bool" key="RunConfiguration.Arguments.multi">false</value>
     <value type="QString" key="RunConfiguration.OverrideDebuggerStartup"></value>
     <value type="bool" key="RunConfiguration.UseCppDebugger">false</value>
@@ -557,7 +557,7 @@
     <value type="bool" key="RunConfiguration.UseMultiProcess">false</value>
     <value type="bool" key="RunConfiguration.UseQmlDebugger">false</value>
     <value type="bool" key="RunConfiguration.UseQmlDebuggerAuto">true</value>
-    <value type="QString" key="RunConfiguration.WorkingDirectory"></value>
+    <value type="QString" key="RunConfiguration.WorkingDirectory">/home/tuket/prog/tw/data</value>
     <value type="QString" key="RunConfiguration.WorkingDirectory.default">/home/tuket/prog/build-tw-Desktop-Debug</value>
    </valuemap>
    <value type="int" key="ProjectExplorer.Target.RunConfigurationCount">4</value>

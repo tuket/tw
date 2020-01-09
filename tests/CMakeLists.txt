@@ -1,7 +1,8 @@
 add_executable(run_test
     tests.cpp
     000_triangle.cpp
-    001_spinning_cube.cpp
+	001_spinning_cube.cpp
+	002_mesh_viewer.cpp
 )
 
 target_link_libraries(run_test
@@ -12,4 +13,5 @@ target_link_libraries(run_test
 	stb
 	tl
 	tgl
+	cgltf
 )

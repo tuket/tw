@@ -99,7 +99,7 @@ void launch_test_0()
 
         shader.use();
         tgl::clearColor(0, 0.1f, 0.1f, 0.f);
-        tgl::draw(vao, tgl::Primitive::TRIANGLES, 3);
+        tgl::drawArrays(vao, tgl::Primitive::TRIANGLES, 3);
 
         SDL_GL_SwapWindow(window);
     }

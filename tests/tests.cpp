@@ -6,10 +6,12 @@ constexpr int size(const T(&)[N]) { return N; }
 
 void launch_test_0();
 void launch_test_1();
+void launch_test_2();
 
 static void (*exampleFns[])() = {
     launch_test_0,
     launch_test_1,
+    launch_test_2,
 };
 
 constexpr int numTests = size(exampleFns);
@@ -17,6 +19,7 @@ constexpr int numTests = size(exampleFns);
 static const char* testNames[] = {
     "triangle",
     "spinning_cube",
+    "mesh_viewer",
 };
 static_assert(size(testNames) == numTests);
 
